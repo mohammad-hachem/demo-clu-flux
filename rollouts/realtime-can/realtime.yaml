@@ -106,7 +106,7 @@ spec:
   selector:
     app: realtime
 ---
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1beta2
 kind: Ingress
 metadata:
   name: realtimeapp-ingress
