@@ -30,11 +30,10 @@ spec:
   selector:
     app: nginx
   ports:
-    - port: 80
+    - port: 883
       targetPort: 80
       nodePort: 30333
   type: LoadBalancer
-  loadBalancerIP: 10.128.74.100
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
