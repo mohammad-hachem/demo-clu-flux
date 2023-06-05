@@ -121,5 +121,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: realtimeapp-stable
-          servicePort: 80
+          service.name: realtimeapp-stable
+          service.port: 80
