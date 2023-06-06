@@ -52,8 +52,9 @@ spec:
         app: rollout-bluegreen
     spec:
       containers:
-        - name: nginxdeployment
-          image: nginxdeployment:latest
+        - name: nginx-demo
+          image: nginx:latest
+          imagePullPolicy: Always
   strategy:
     blueGreen: 
       # activeService specifies the service to update with the new template hash at time of promotion.
@@ -69,3 +70,29 @@ spec:
       # Rollouts can be resumed using: `kubectl argo rollouts promote ROLLOUT`
       autoPromotionEnabled: false
 ---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-active
+spec:
+  ports:
+    - port: 8082
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: rollout-bluegreen
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-preview
+spec:
+  ports:
+    - port: 8083
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: rollout-bluegreen
