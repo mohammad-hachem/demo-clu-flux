@@ -16,8 +16,8 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: my-nginx-image-live
+        image: my-nginx-image-live
         ports:
         - containerPort: 80
 ---
@@ -52,8 +52,8 @@ spec:
         app: rollout-bluegreen
     spec:
       containers:
-        - name: nginx-demo
-          image: nginx:latest
+        - name: my-nginx-image-rollout
+          image: my-nginx-image-rollout
           imagePullPolicy: Always
   strategy:
     blueGreen: 
