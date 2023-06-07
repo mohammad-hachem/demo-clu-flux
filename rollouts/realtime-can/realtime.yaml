@@ -1,41 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: nginxdeployment
   namespace: testelias
-  name: my-nginx-image-live
   labels:
-    app: my-nginx-image-live
+    app: nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-nginx-image-live
+      app: nginx
   template:
     metadata:
       labels:
-        app: my-nginx-image-live
+        app: nginx
     spec:
       containers:
-      - name: my-nginx-image-live
-        image: my-nginx-image-live
+      - name: nginx
+        image: eliasabouhamad/my-nginx-image-live:latest
         ports:
         - containerPort: 80
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: testelias
   name: nginx-service
+  namespace: testelias
 spec:
   selector:
     app: nginx
   ports:
-    - port: 8082
+    - port: 80
       targetPort: 80
       nodePort: 30333
   type: LoadBalancer
 ---
+
+
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
@@ -52,8 +53,8 @@ spec:
         app: rollout-bluegreen
     spec:
       containers:
-        - name: my-nginx-image-rollout
-          image: my-nginx-image-rollout
+        - name: nginx
+          image: eliasabouhamad/my-nginx-image-rollout:latest
           imagePullPolicy: Always
   strategy:
     blueGreen: 
