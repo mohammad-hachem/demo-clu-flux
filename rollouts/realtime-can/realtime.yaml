@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: eliasabouhamad/my-nginx-image-live:1.4
+          image: eliasabouhamad/my-nginx-image-live:1.5
           imagePullPolicy: Always
   strategy:
     blueGreen: 
